@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import ProjectCard from "./components/ProjectCard";
 import styles from "./App.module.css";
+import ProjectCard from "./components/ProjectCard";
 import { initialProjects } from "./data/projects";
+
+const categories: Category[] = ["All", "Frontend", "Backend", "Full stack"];
 
 export default function App() {
   const [projects, setProjects] = useState<Project[]>(initialProjects);
@@ -122,7 +124,7 @@ export default function App() {
 
         <div className={styles.toolbar}>
           <div className={styles.filters} aria-label="Filter by category">
-            {["All", "Frontend", "Backend", "Full stack"].map((item) => (
+            {categories.map((item) => (
               <button
                 key={item}
                 className={`${styles.filter} ${category === item ? styles.activeFilter : ""}`}
