@@ -1,4 +1,3 @@
-import type { Project } from "../types";
 import styles from "./ProjectCard.module.css";
 
 type Props = {

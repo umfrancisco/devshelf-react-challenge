@@ -1,10 +1,7 @@
 import { useMemo, useState } from "react";
-import { initialProjects } from "./data/projects";
-import type { Project } from "./types";
 import ProjectCard from "./components/ProjectCard";
 import styles from "./App.module.css";
-
-type SortMode = "recent" | "stars";
+import { initialProjects } from "./data/projects";
 
 export default function App() {
   const [projects, setProjects] = useState<Project[]>(initialProjects);

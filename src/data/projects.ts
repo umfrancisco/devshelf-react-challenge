@@ -1,5 +1,3 @@
-import type { Project } from "../types";
-
 export const initialProjects: Project[] = [
   { id: 1, name: "Pixel Pantry", description: "A responsive recipe finder with saved collections.", category: "Frontend", stars: 18, updatedAt: "2026-10-12", favorite: true },
   { id: 2, name: "Pulse API", description: "A REST API for tracking habits and daily routines.", category: "Backend", stars: 31, updatedAt: "2026-10-18", favorite: false },
