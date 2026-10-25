@@ -15,7 +15,7 @@ export default function App() {
 
     if (search.trim()) {
       result = result.filter((project) =>
-        project.name.toLowerCase().includes(search.toLowerCase()),
+        project.name.toLowerCase().includes(search.toLowerCase())
       );
     }
 
@@ -30,7 +30,7 @@ export default function App() {
     result.sort((a, b) =>
       sortMode === "recent"
         ? a.updatedAt.localeCompare(b.updatedAt)
-        : a.stars - b.stars,
+        : a.stars - b.stars
     );
 
     return result;
@@ -39,8 +39,8 @@ export default function App() {
   function toggleFavorite(id: number) {
     setProjects((current) =>
       current.map((project) =>
-        project.id === id ? { ...project, favorite: project.favorite } : project,
-      ),
+        project.id === id ? { ...project, favorite: project.favorite } : project
+      )
     );
   }
 
@@ -51,17 +51,39 @@ export default function App() {
           <span className={styles.logo}>D</span>
           <span>devshelf</span>
         </a>
-        <span className={styles.headerNote}>A little home for side projects</span>
+        <span className={styles.headerNote}>
+          A little home for side projects
+        </span>
       </header>
 
       <section className={styles.hero}>
         <p className={styles.eyebrow}>THE COMMUNITY PROJECT SHELF</p>
-        <h1>Good ideas deserve<br /><span>a place to grow.</span></h1>
-        <p className={styles.subtitle}>Explore small projects built by curious developers. Find inspiration for what to build next.</p>
+        <h1>
+          Good ideas deserve
+          <br />
+          <span>a place to grow.</span>
+        </h1>
+        <p className={styles.subtitle}>
+          Explore small projects built by curious developers. Find inspiration
+          for what to build next.
+        </p>
         <div className={styles.stats}>
-          <div><strong>{projects.length}</strong><span>Projects</span></div>
-          <div><strong>{projects.reduce((total, project) => total + project.stars, 0)}</strong><span>Community stars</span></div>
-          <div><strong>{projects.filter((project) => project.favorite).length}</strong><span>Your favorites</span></div>
+          <div>
+            <strong>{projects.length}</strong>
+            <span>Projects</span>
+          </div>
+          <div>
+            <strong>
+              {projects.reduce((total, project) => total + project.stars, 0)}
+            </strong>
+            <span>Community stars</span>
+          </div>
+          <div>
+            <strong>
+              {projects.filter((project) => project.favorite).length}
+            </strong>
+            <span>Your favorites</span>
+          </div>
         </div>
       </section>
 
@@ -89,26 +111,43 @@ export default function App() {
                 key={item}
                 className={`${styles.filter} ${category === item ? styles.activeFilter : ""}`}
                 onClick={() => setCategory(item)}
-              >{item}</button>
+              >
+                {item}
+              </button>
             ))}
           </div>
           <div className={styles.controls}>
             <label className={styles.favoritesToggle}>
-              <input type="checkbox" checked={favoritesOnly} onChange={(event) => setFavoritesOnly(event.target.checked)} />
+              <input
+                type="checkbox"
+                checked={favoritesOnly}
+                onChange={(event) => setFavoritesOnly(event.target.checked)}
+              />
               Favorites only
             </label>
-            <select value={sortMode} onChange={(event) => setSortMode(event.target.value as SortMode)} aria-label="Sort projects">
+            <select
+              value={sortMode}
+              onChange={(event) => setSortMode(event.target.value as SortMode)}
+              aria-label="Sort projects"
+            >
               <option value="recent">Recently updated</option>
               <option value="stars">Most stars</option>
             </select>
           </div>
         </div>
 
-        <p className={styles.resultCount}>Showing <strong>{visibleProjects.length}</strong> of {projects.length} projects</p>
+        <p className={styles.resultCount}>
+          Showing <strong>{visibleProjects.length}</strong> of {projects.length}{" "}
+          projects
+        </p>
         {visibleProjects.length > 0 ? (
           <div className={styles.grid}>
             {visibleProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} onToggleFavorite={toggleFavorite} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onToggleFavorite={toggleFavorite}
+              />
             ))}
           </div>
         ) : (
@@ -116,11 +155,21 @@ export default function App() {
             <span>⌕</span>
             <h3>No projects found</h3>
             <p>Try another search or clear a filter to see more projects.</p>
-            <button onClick={() => { setSearch(""); setCategory("All"); setFavoritesOnly(false); }}>Clear filters</button>
+            <button
+              onClick={() => {
+                setSearch("");
+                setCategory("All");
+                setFavoritesOnly(false);
+              }}
+            >
+              Clear filters
+            </button>
           </div>
         )}
       </section>
-      <footer className={styles.footer}>Made for builders, by builders <span>✳</span></footer>
+      <footer className={styles.footer}>
+        Made for builders, by builders <span>✳</span>
+      </footer>
     </main>
   );
 }
