@@ -102,7 +102,7 @@ This project provides practical experience with:
 
 - Debugging React components and event handlers.
 - Understanding React state and immutable updates.
-- Using `useState` and `useMemo`.
+- Using `useState` and `useEffect`.
 - Working with array methods such as `filter`, `map`, `sort`, and `reduce`.
 - Implementing search, filtering, and sorting logic.
 - Using TypeScript types and strict type checking.
