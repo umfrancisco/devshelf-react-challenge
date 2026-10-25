@@ -1,14 +1,30 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ProjectCard from "./components/ProjectCard";
 import styles from "./App.module.css";
 import { initialProjects } from "./data/projects";
 
 export default function App() {
   const [projects, setProjects] = useState<Project[]>(initialProjects);
+  const [selected, setSelected] = useState<Project[]>([]);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState<Category>("All");
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [sortMode, setSortMode] = useState<SortMode>("recent");
+
+  useEffect(() => {
+    if (search === "" && category === "All") {
+      setSelected([...projects]);
+    }
+    if (category === "Frontend") {
+      setSelected(projects.filter(project => project.category === "Frontend"));
+    }
+    if (category === "Backend") {
+      setSelected(projects.filter(project => project.category === "Backend"));
+    }
+    if (category === "Full stack") {
+      setSelected(projects.filter(project => project.category === "Full stack"));
+    }
+  }, [search, category]);
 
   const visibleProjects = useMemo(() => {
     let result = [...projects];
@@ -137,12 +153,12 @@ export default function App() {
         </div>
 
         <p className={styles.resultCount}>
-          Showing <strong>{visibleProjects.length}</strong> of {projects.length}{" "}
+          Showing <strong>{selected.length}</strong> of {projects.length}{" "}
           projects
         </p>
-        {visibleProjects.length > 0 ? (
+        {selected.length > 0 ? (
           <div className={styles.grid}>
-            {visibleProjects.map((project) => (
+            {selected.map((project) => (
               <ProjectCard
                 key={project.id}
                 project={project}

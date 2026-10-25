@@ -1,8 +1,10 @@
+declare type Category = "Frontend" | "Backend" | "Full stack" | "All";
+
 declare type Project = {
   id: number;
   name: string;
   description: string;
-  category: "Frontend" | "Backend" | "Full stack" | "All";
+  category: Category;
   stars: number;
   updatedAt: string;
   favorite: boolean;
