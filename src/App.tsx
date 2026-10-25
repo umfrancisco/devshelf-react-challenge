@@ -1,122 +1,129 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useMemo, useState } from "react";
+import { initialProjects } from "./data/projects";
+import type { Project } from "./types";
+import ProjectCard from "./components/ProjectCard";
+import styles from "./App.module.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+type SortMode = "recent" | "stars";
+
+export default function App() {
+  const [projects, setProjects] = useState<Project[]>(initialProjects);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All");
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const [sortMode, setSortMode] = useState<SortMode>("recent");
+
+  const visibleProjects = useMemo(() => {
+    let result = [...projects];
+
+    if (search.trim()) {
+      result = result.filter((project) =>
+        project.name.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
+
+    if (category !== "All") {
+      result = result.filter((project) => project.category === "All");
+    }
+
+    if (favoritesOnly) {
+      result = result.filter((project) => project.favorite === false);
+    }
+
+    result.sort((a, b) =>
+      sortMode === "recent"
+        ? a.updatedAt.localeCompare(b.updatedAt)
+        : a.stars - b.stars,
+    );
+
+    return result;
+  }, [projects, search, category, favoritesOnly, sortMode]);
+
+  function toggleFavorite(id: number) {
+    setProjects((current) =>
+      current.map((project) =>
+        project.id === id ? { ...project, favorite: project.favorite } : project,
+      ),
+    );
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <main className={styles.page}>
+      <header className={styles.header}>
+        <a className={styles.brand} href="/" aria-label="DevShelf home">
+          <span className={styles.logo}>D</span>
+          <span>devshelf</span>
+        </a>
+        <span className={styles.headerNote}>A little home for side projects</span>
+      </header>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+      <section className={styles.hero}>
+        <p className={styles.eyebrow}>THE COMMUNITY PROJECT SHELF</p>
+        <h1>Good ideas deserve<br /><span>a place to grow.</span></h1>
+        <p className={styles.subtitle}>Explore small projects built by curious developers. Find inspiration for what to build next.</p>
+        <div className={styles.stats}>
+          <div><strong>{projects.length}</strong><span>Projects</span></div>
+          <div><strong>{projects.reduce((total, project) => total + project.stars, 0)}</strong><span>Community stars</span></div>
+          <div><strong>{projects.filter((project) => project.favorite).length}</strong><span>Your favorites</span></div>
         </div>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <section className={styles.library} aria-labelledby="library-heading">
+        <div className={styles.sectionHeading}>
+          <div>
+            <p className={styles.eyebrow}>BROWSE THE LIBRARY</p>
+            <h2 id="library-heading">Featured projects</h2>
+          </div>
+          <label className={styles.searchWrap}>
+            <span aria-hidden="true">⌕</span>
+            <input
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Search projects..."
+              aria-label="Search projects"
+            />
+          </label>
+        </div>
+
+        <div className={styles.toolbar}>
+          <div className={styles.filters} aria-label="Filter by category">
+            {["All", "Frontend", "Backend", "Full stack"].map((item) => (
+              <button
+                key={item}
+                className={`${styles.filter} ${category === item ? styles.activeFilter : ""}`}
+                onClick={() => setCategory(item)}
+              >{item}</button>
+            ))}
+          </div>
+          <div className={styles.controls}>
+            <label className={styles.favoritesToggle}>
+              <input type="checkbox" checked={favoritesOnly} onChange={(event) => setFavoritesOnly(event.target.checked)} />
+              Favorites only
+            </label>
+            <select value={sortMode} onChange={(event) => setSortMode(event.target.value as SortMode)} aria-label="Sort projects">
+              <option value="recent">Recently updated</option>
+              <option value="stars">Most stars</option>
+            </select>
+          </div>
+        </div>
+
+        <p className={styles.resultCount}>Showing <strong>{visibleProjects.length}</strong> of {projects.length} projects</p>
+        {visibleProjects.length > 0 ? (
+          <div className={styles.grid}>
+            {visibleProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} onToggleFavorite={toggleFavorite} />
+            ))}
+          </div>
+        ) : (
+          <div className={styles.empty}>
+            <span>⌕</span>
+            <h3>No projects found</h3>
+            <p>Try another search or clear a filter to see more projects.</p>
+            <button onClick={() => { setSearch(""); setCategory("All"); setFavoritesOnly(false); }}>Clear filters</button>
+          </div>
+        )}
+      </section>
+      <footer className={styles.footer}>Made for builders, by builders <span>✳</span></footer>
+    </main>
+  );
 }
-
-export default App
