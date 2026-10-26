@@ -86,7 +86,7 @@ Your objective is to identify and fix the implementation issues while preserving
 
 ### Tasks
 
-- [ ] Fix search behavior so it matches project names and descriptions, ignoring case and surrounding whitespace.
+- [x] Fix search behavior so it matches project names and descriptions, ignoring case and surrounding whitespace.
 - [x] Fix category filtering.
 - [ ] Fix the favorites-only filter.
 - [ ] Fix the favorite toggle functionality.
