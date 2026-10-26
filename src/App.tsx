@@ -13,6 +13,8 @@ export default function App() {
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [sortMode, setSortMode] = useState<SortMode>("recent");
 
+  console.log(search);
+
   useEffect(() => {
     if (search === "" && category === "All") {
       setSelected([...projects]);
@@ -25,6 +27,13 @@ export default function App() {
     }
     if (category === "Full stack") {
       setSelected(projects.filter(project => project.category === "Full stack"));
+    }
+    if (search !== "") {
+      setSelected(selected.filter(project => {
+        const searched = search.toLowerCase();
+        const projectName = project.name.split(" ").reduce((p, c) => p + c, "").toLowerCase();
+        return projectName.includes(searched);
+      }));
     }
   }, [search, category]);
 
