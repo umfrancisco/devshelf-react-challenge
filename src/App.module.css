@@ -99,28 +99,14 @@
   letter-spacing: -1px;
 }
 .searchWrap {
-  width: 280px;
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 14px;
-  height: 44px;
   border: 1px solid #e0e4ec;
-  background: white;
+  padding: 0 8px;
   border-radius: 10px;
-  color: #8c94a4;
-}
-.searchWrap span {
-  font-size: 25px;
 }
 .searchWrap input {
-  border: 0;
-  outline: 0;
-  width: 100%;
-  color: #20263a;
-  background: transparent;
-  font: inherit;
-  font-size: 13px;
+  margin-left: 8px;
+  border: none;
 }
 .toolbar {
   margin-top: 28px;
