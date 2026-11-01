@@ -28,7 +28,14 @@ export default function App() {
         return projectName.includes(searched);
       }));
     }
-  }, [search, category, projects]);
+    if (favoritesOnly) {
+      setSelected(category === "All" ? (
+        projects.filter(p => p.favorite)
+      ) : (
+        projects.filter(p => p.category === category).filter(p => p.favorite)
+      ));
+    }
+  }, [search, category, favoritesOnly, projects]);
 
   function toggleFavorite(id: number) {
     setProjects((current) => current.map((project) => project.id === id ? { ...project, favorite: !project.favorite } : project));
