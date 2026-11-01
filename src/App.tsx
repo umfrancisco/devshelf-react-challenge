@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import styles from "./App.module.css";
 import ProjectCard from "./components/ProjectCard";
 import { initialProjects } from "./data/projects";
+import type { Category, Project, SortMode } from "./types";
 
 const categories: Category[] = ["All", "Frontend", "Backend", "Full stack"];
 
@@ -12,8 +13,6 @@ export default function App() {
   const [category, setCategory] = useState<Category>("All");
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [sortMode, setSortMode] = useState<SortMode>("recent");
-
-  console.log(search);
 
   useEffect(() => {
     if (search === "" && category === "All") {
