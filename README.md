@@ -89,7 +89,7 @@ Your objective is to identify and fix the implementation issues while preserving
 - [x] Fix search behavior so it matches project names and descriptions, ignoring case and surrounding whitespace.
 - [x] Fix category filtering.
 - [ ] Fix the favorites-only filter.
-- [ ] Fix the favorite toggle functionality.
+- [x] Fix the favorite toggle functionality.
 - [ ] Fix sorting so recently updated projects appear first.
 - [ ] Fix sorting so projects with the most stars appear first.
 - [ ] Ensure the clear-filters button resets all relevant filters.
