@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./App.module.css";
 import ProjectCard from "./components/ProjectCard";
 import { initialProjects } from "./data/projects";
@@ -18,14 +18,8 @@ export default function App() {
     if (search === "" && category === "All") {
       setSelected([...projects]);
     }
-    if (category === "Frontend") {
-      setSelected(projects.filter(project => project.category === "Frontend"));
-    }
-    if (category === "Backend") {
-      setSelected(projects.filter(project => project.category === "Backend"));
-    }
-    if (category === "Full stack") {
-      setSelected(projects.filter(project => project.category === "Full stack"));
+    if (category !== "All") {
+      setSelected(projects.filter(project => project.category === category));
     }
     if (search !== "") {
       setSelected(selected.filter(project => {
@@ -34,40 +28,10 @@ export default function App() {
         return projectName.includes(searched);
       }));
     }
-  }, [search, category]);
-
-  const visibleProjects = useMemo(() => {
-    let result = [...projects];
-
-    if (search.trim()) {
-      result = result.filter((project) =>
-        project.name.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-
-    if (category !== "All") {
-      result = result.filter((project) => project.category === "All");
-    }
-
-    if (favoritesOnly) {
-      result = result.filter((project) => project.favorite === false);
-    }
-
-    result.sort((a, b) =>
-      sortMode === "recent"
-        ? a.updatedAt.localeCompare(b.updatedAt)
-        : a.stars - b.stars
-    );
-
-    return result;
-  }, [projects, search, category, favoritesOnly, sortMode]);
+  }, [search, category, projects]);
 
   function toggleFavorite(id: number) {
-    setProjects((current) =>
-      current.map((project) =>
-        project.id === id ? { ...project, favorite: project.favorite } : project
-      )
-    );
+    setProjects((current) => current.map((project) => project.id === id ? { ...project, favorite: !project.favorite } : project));
   }
 
   return (
