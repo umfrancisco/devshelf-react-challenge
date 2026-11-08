@@ -3,37 +3,6 @@
   margin: 0 auto;
   padding: 0 32px;
 }
-.header {
-  height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #e8ebf1;
-}
-.brand {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.7px;
-  color: #20263a;
-}
-.logo {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: #635bff;
-  color: white;
-  font-size: 17px;
-}
-.headerNote {
-  color: #8b93a3;
-  font-size: 13px;
-}
 .hero {
   padding: 68px 0 54px;
   text-align: center;

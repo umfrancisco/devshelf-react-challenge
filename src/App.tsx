@@ -3,6 +3,7 @@ import styles from "./App.module.css";
 import ProjectCard from "./components/ProjectCard";
 import { initialProjects } from "./data/projects";
 import type { Category, Project, SortMode } from "./types";
+import Header from "./components/Header";
 
 const categories: Category[] = ["All", "Frontend", "Backend", "Full stack"];
 
@@ -43,15 +44,7 @@ export default function App() {
 
   return (
     <main className={styles.page}>
-      <header className={styles.header}>
-        <a className={styles.brand} href="/" aria-label="DevShelf home">
-          <span className={styles.logo}>D</span>
-          <span>devshelf</span>
-        </a>
-        <span className={styles.headerNote}>
-          A little home for side projects
-        </span>
-      </header>
+      <Header />
 
       <section className={styles.hero}>
         <p className={styles.eyebrow}>THE COMMUNITY PROJECT SHELF</p>
