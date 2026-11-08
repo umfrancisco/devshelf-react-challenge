@@ -32,3 +32,9 @@
   color: #8b93a3;
   font-size: 13px;
 }
+
+@media (max-width: 560px) {
+  .headerNote {
+    display: none;
+  }
+}

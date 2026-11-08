@@ -52,3 +52,21 @@
   font-size: 12px;
   color: #8991a0;
 }
+
+@media (max-width: 560px) {
+  .hero {
+    padding: 50px 0 42px;
+  }
+
+  .hero h1 {
+    letter-spacing: -1.8px;
+  }
+
+  .stats {
+    gap: 24px;
+  }
+  
+  .stats strong {
+    font-size: 21px;
+  }
+}

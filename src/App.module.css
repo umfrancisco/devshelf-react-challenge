@@ -4,49 +4,8 @@
   padding: 0 32px;
 }
 
-@media (max-width: 850px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .sectionHeading {
-    align-items: stretch;
-    flex-direction: column;
-  }
-  .searchWrap {
-    width: auto;
-  }
-}
 @media (max-width: 560px) {
   .page {
     padding: 0 18px;
-  }
-  .headerNote {
-    display: none;
-  }
-  .hero {
-    padding: 50px 0 42px;
-  }
-  .hero h1 {
-    letter-spacing: -1.8px;
-  }
-  .stats {
-    gap: 24px;
-  }
-  .stats strong {
-    font-size: 21px;
-  }
-  .grid {
-    grid-template-columns: 1fr;
-  }
-  .toolbar {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-  .filters {
-    flex-wrap: wrap;
-  }
-  .controls {
-    width: 100%;
-    justify-content: space-between;
-  }
+  }  
 }
