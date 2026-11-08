@@ -1,11 +1,9 @@
-import type { Project } from "../types";
+import { useLibraryContext } from "../contexts/LibraryContext";
 import styles from "./Hero.module.css";
 
-type Props = {
-  projects: Project[];
-}
+function Hero() {
+  const { projects } = useLibraryContext();
 
-function Hero({ projects }: Props) {
   return (
     <section className={styles.hero}>
       <p className={styles.eyebrow}>THE COMMUNITY PROJECT SHELF</p>

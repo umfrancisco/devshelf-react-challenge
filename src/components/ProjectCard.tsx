@@ -1,19 +1,25 @@
+import { useLibraryContext } from "../contexts/LibraryContext";
 import type { Project } from "../types";
 import styles from "./ProjectCard.module.css";
 
 type Props = {
   project: Project;
-  onToggleFavorite: (id: number) => void;
-};
+}
 
-export default function ProjectCard({ project, onToggleFavorite }: Props) {
+export default function ProjectCard({ project }: Props) {
+  const { setProjects } = useLibraryContext();
+
+  function toggleFavorite(id: number) {
+    setProjects((current) => current.map((project) => project.id === id ? { ...project, favorite: !project.favorite } : project));
+  }
+
   return (
     <article className={styles.card}>
       <div className={styles.cardTop}>
         <span className={styles.category}>{project.category}</span>
         <button
           className={`${styles.favorite} ${project.favorite ? styles.isFavorite : ""}`}
-          onClick={() => onToggleFavorite(project.id)}
+          onClick={() => toggleFavorite(project.id)}
           aria-label={
             project.favorite ? "Remove from favorites" : "Add to favorites"
           }

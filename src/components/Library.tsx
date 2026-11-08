@@ -1,24 +1,24 @@
+import { useLibraryContext } from "../contexts/LibraryContext";
 import type { Category, SortMode } from "../types";
 import styles from "./Library.module.css";
 import ProjectCard from "./ProjectCard";
 
 const categories: Category[] = ["All", "Frontend", "Backend", "Full stack"];
 
-type Props = {
-  search: any;
-  setSearch: any;
-  category: any;
-  setCategory: any;
-  favoritesOnly: any;
-  setFavoritesOnly: any;
-  sortMode: any;
-  setSortMode: any;
-  selected: any;
-  projects: any;
-  onToggleFavorite: any;
-}
+function Library() {
+  const { 
+    search, 
+    setSearch, 
+    category, 
+    setCategory, 
+    favoritesOnly, 
+    setFavoritesOnly, 
+    sortMode, 
+    setSortMode,
+    selected,
+    projects,
+  } = useLibraryContext();
 
-function Library({ search, setSearch, category, setCategory, favoritesOnly, setFavoritesOnly, sortMode, setSortMode, selected, projects, onToggleFavorite }: Props) {
   return (
     <section className={styles.library} aria-labelledby="library-heading">
       <div className={styles.sectionHeading}>
@@ -76,7 +76,7 @@ function Library({ search, setSearch, category, setCategory, favoritesOnly, setF
       {selected.length > 0 ? (
         <div className={styles.grid}>
           {selected.map((project) => (
-            <ProjectCard key={project.id} project={project} onToggleFavorite={onToggleFavorite} />
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       ) : (

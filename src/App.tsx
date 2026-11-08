@@ -1,64 +1,20 @@
-import { useEffect, useState } from "react";
 import styles from "./App.module.css";
-import { initialProjects } from "./data/projects";
-import type { Category, Project, SortMode } from "./types";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Library from "./components/Library";
 import Footer from "./components/Footer";
+import LibraryContextProvider from "./contexts/LibraryContextProvider";
 
 export default function App() {
-  const [projects, setProjects] = useState<Project[]>(initialProjects);
-  const [selected, setSelected] = useState<Project[]>([]);
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<Category>("All");
-  const [favoritesOnly, setFavoritesOnly] = useState(false);
-  const [sortMode, setSortMode] = useState<SortMode>("recent");
-
-  useEffect(() => {
-    if (search === "" && category === "All") {
-      setSelected([...projects]);
-    }
-    if (category !== "All") {
-      setSelected(projects.filter(project => project.category === category));
-    }
-    if (search !== "") {
-      setSelected(selected.filter(project => {
-        const searched = search.toLowerCase();
-        const projectName = project.name.split(" ").reduce((p, c) => p + c, "").toLowerCase();
-        return projectName.includes(searched);
-      }));
-    }
-    if (favoritesOnly) {
-      setSelected(category === "All" ? (
-        projects.filter(p => p.favorite)
-      ) : (
-        projects.filter(p => p.category === category).filter(p => p.favorite)
-      ));
-    }
-  }, [search, category, favoritesOnly, projects]);
-
-  function toggleFavorite(id: number) {
-    setProjects((current) => current.map((project) => project.id === id ? { ...project, favorite: !project.favorite } : project));
-  }
 
   return (
-    <main className={styles.page}>
-      <Header />
-      <Hero projects={projects} />
-      <Library 
-        search={search} 
-        setSearch={setSearch} 
-        category={category} 
-        setCategory={setCategory} 
-        favoritesOnly={favoritesOnly} 
-        setFavoritesOnly={setFavoritesOnly} 
-        sortMode={sortMode} 
-        setSortMode={setSortMode} 
-        selected={selected} 
-        projects={projects} 
-        onToggleFavorite={toggleFavorite} />
-      <Footer />
-    </main>
+    <LibraryContextProvider>
+      <main className={styles.page}>
+        <Header />
+        <Hero />
+        <Library />
+        <Footer />
+      </main>
+    </LibraryContextProvider>
   );
 }
