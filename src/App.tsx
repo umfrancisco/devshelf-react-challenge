@@ -5,6 +5,7 @@ import type { Category, Project, SortMode } from "./types";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Library from "./components/Library";
+import Footer from "./components/Footer";
 
 export default function App() {
   const [projects, setProjects] = useState<Project[]>(initialProjects);
@@ -57,9 +58,7 @@ export default function App() {
         selected={selected} 
         projects={projects} 
         onToggleFavorite={toggleFavorite} />
-      <footer className={styles.footer}>
-        Made for builders, by builders <span>✳</span>
-      </footer>
+      <Footer />
     </main>
   );
 }
