@@ -5,8 +5,7 @@ import Library from "./components/Library";
 import Footer from "./components/Footer";
 import LibraryContextProvider from "./contexts/LibraryContextProvider";
 
-export default function App() {
-
+function App() {
   return (
     <LibraryContextProvider>
       <main className={styles.page}>
@@ -18,3 +17,5 @@ export default function App() {
     </LibraryContextProvider>
   );
 }
+
+export default App;
