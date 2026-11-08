@@ -1,0 +1,148 @@
+.library {
+  padding: 34px 0 70px;
+  border-top: 1px solid #e8ebf1;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.sectionHeading .eyebrow {
+  margin-bottom: 8px;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  font-size: 27px;
+  letter-spacing: -1px;
+}
+
+.eyebrow {
+  color: #635bff;
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  font-weight: 800;
+  margin: 0 0 16px;
+}
+
+.searchWrap {
+  display: flex;
+  border: 1px solid #e0e4ec;
+  padding: 0 8px;
+  border-radius: 10px;
+}
+
+.searchWrap input {
+  margin-left: 8px;
+  border: none;
+}
+
+.toolbar {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.filters,
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter {
+  padding: 9px 13px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #71798b;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+}
+
+.activeFilter {
+  background: #efefff;
+  color: #5148df;
+  font-weight: 700;
+}
+
+.controls {
+  color: #70798a;
+  font-size: 12px;
+}
+
+.controls select {
+  border: 1px solid #e0e4ec;
+  border-radius: 8px;
+  background: white;
+  padding: 10px 12px;
+  color: #424b5e;
+  font: inherit;
+  font-size: 12px;
+}
+
+.favoritesToggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.favoritesToggle input {
+  accent-color: #635bff;
+}
+
+.resultCount {
+  margin: 22px 0 14px;
+  color: #8b93a3;
+  font-size: 12px;
+}
+
+.resultCount strong {
+  color: #3d4658;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  border: 1px dashed #d8dce6;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.empty > span {
+  font-size: 36px;
+  color: #8b85ff;
+}
+
+.empty h3 {
+  margin: 12px 0 6px;
+}
+
+.empty p {
+  color: #7c8596;
+  font-size: 13px;
+}
+
+.empty button {
+  margin-top: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #635bff;
+  color: white;
+  padding: 10px 14px;
+  cursor: pointer;
+}
